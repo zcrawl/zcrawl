@@ -1,0 +1,13 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "t9W6XhUm1WcC3lfcLdgCm849EmY=",
+			"path": "github.com/go-chi/chi",
+			"revision": "f4d4455cd3e784058861867555171766afa08425",
+			"revisionTime": "2017-11-09T15:45:59Z"
+		}
+	],
+	"rootPath": "github.com/matiasinsaurralde/zcrawl-platform"
+}
