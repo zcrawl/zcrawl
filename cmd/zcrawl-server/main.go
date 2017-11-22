@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	defaultAddr = "localhost:9999"
+	defaultAddr = ":9999"
 )
 
 func main() {
