@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/matiasinsaurralde/zcrawl-platform/server"
+	"github.com/zcrawl/zcrawl/server"
 )
 
 const (

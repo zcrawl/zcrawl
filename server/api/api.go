@@ -5,12 +5,12 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/matiasinsaurralde/zcrawl-platform/server/api/crawlers"
-	"github.com/matiasinsaurralde/zcrawl-platform/server/api/jobs"
-	"github.com/matiasinsaurralde/zcrawl-platform/server/api/projects"
-	"github.com/matiasinsaurralde/zcrawl-platform/server/api/users"
-	"github.com/matiasinsaurralde/zcrawl-platform/server/api/workers"
 	"github.com/sirupsen/logrus"
+	"github.com/zcrawl/zcrawl/server/api/crawlers"
+	"github.com/zcrawl/zcrawl/server/api/jobs"
+	"github.com/zcrawl/zcrawl/server/api/projects"
+	"github.com/zcrawl/zcrawl/server/api/users"
+	"github.com/zcrawl/zcrawl/server/api/workers"
 )
 
 // API wraps the main router.

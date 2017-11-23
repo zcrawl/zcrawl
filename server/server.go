@@ -3,7 +3,7 @@ package server
 import (
 	"net/http"
 
-	"github.com/matiasinsaurralde/zcrawl-platform/server/api"
+	"github.com/zcrawl/zcrawl/server/api"
 )
 
 // Server is the main server data structure.
