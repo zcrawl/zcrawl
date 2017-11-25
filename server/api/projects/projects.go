@@ -1,9 +1,12 @@
 package projects
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"net/http"
 
 	"github.com/go-chi/chi"
+	"github.com/zcrawl/zcrawl/server/api/models"
 )
 
 // Router wraps chi.Router.
@@ -15,9 +18,31 @@ func (r *Router) getProjects(w http.ResponseWriter, req *http.Request) {
 }
 
 func (r *Router) createProject(w http.ResponseWriter, req *http.Request) {
+	if req.Body == nil {
+	}
+	rawProject, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+	}
+	p := models.Project{}
+	err = json.Unmarshal(rawProject, &p)
+	if err != nil {
+	}
+	p.Save()
 }
 
 func (r *Router) getProject(w http.ResponseWriter, req *http.Request) {
+	id := chi.URLParam(req, "id")
+	if id == "" {
+		return
+	}
+	p := models.Project{}
+	err := p.Get(id)
+	if err != nil {
+		return
+	}
+	projectJSON, _ := json.Marshal(&p)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(projectJSON)
 }
 
 func (r *Router) updateProject(w http.ResponseWriter, req *http.Request) {
