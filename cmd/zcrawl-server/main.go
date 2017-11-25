@@ -5,12 +5,14 @@ import (
 )
 
 const (
-	defaultAddr = ":9999"
+	defaultAddr      = ":9999"
+	defaultMongoAddr = "localhost:27017"
 )
 
 func main() {
 	settings := &server.Settings{
 		ListenAddr: defaultAddr,
+		MongoAddr:  defaultMongoAddr,
 	}
 	s := server.New(settings)
 	err := s.Start()
