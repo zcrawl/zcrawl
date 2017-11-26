@@ -31,7 +31,14 @@ func (r *Router) createProject(w http.ResponseWriter, req *http.Request) {
 		helpers.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 		return
 	}
-	p.Save()
+	err = p.Save()
+	if err != nil {
+		helpers.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		return
+	}
+	projectJSON, _ := json.Marshal(&p)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(projectJSON)
 }
 
 func (r *Router) getProject(w http.ResponseWriter, req *http.Request) {
