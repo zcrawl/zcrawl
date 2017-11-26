@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
+	"github.com/zcrawl/zcrawl/server/api/helpers"
 	"github.com/zcrawl/zcrawl/server/api/models"
 )
 
@@ -18,14 +19,17 @@ func (r *Router) getProjects(w http.ResponseWriter, req *http.Request) {
 }
 
 func (r *Router) createProject(w http.ResponseWriter, req *http.Request) {
-	if req.Body == nil {
-	}
+
 	rawProject, err := ioutil.ReadAll(req.Body)
 	if err != nil {
+		helpers.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		return
 	}
 	p := models.Project{}
 	err = json.Unmarshal(rawProject, &p)
 	if err != nil {
+		helpers.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		return
 	}
 	p.Save()
 }
@@ -33,11 +37,13 @@ func (r *Router) createProject(w http.ResponseWriter, req *http.Request) {
 func (r *Router) getProject(w http.ResponseWriter, req *http.Request) {
 	id := chi.URLParam(req, "id")
 	if id == "" {
+		helpers.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 		return
 	}
 	p := models.Project{}
 	err := p.Get(id)
 	if err != nil {
+		helpers.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 		return
 	}
 	projectJSON, _ := json.Marshal(&p)
