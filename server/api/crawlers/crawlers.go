@@ -30,7 +30,15 @@ func (r *Router) createCrawler(w http.ResponseWriter, req *http.Request) {
 		helpers.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 		return
 	}
-	c.Save()
+	err = c.Save()
+	if err != nil {
+		helpers.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		return
+	}
+	crawlerJSON, _ := json.Marshal(&c)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	w.Write(crawlerJSON)
 }
 
 func (r *Router) getCrawler(w http.ResponseWriter, req *http.Request) {

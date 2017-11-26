@@ -38,6 +38,7 @@ func (r *Router) createProject(w http.ResponseWriter, req *http.Request) {
 	}
 	projectJSON, _ := json.Marshal(&p)
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
 	w.Write(projectJSON)
 }
 
