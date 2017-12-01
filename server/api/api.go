@@ -7,6 +7,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/sirupsen/logrus"
 	"github.com/zcrawl/zcrawl/server/api/crawlers"
+	"github.com/zcrawl/zcrawl/server/api/datastore"
 	"github.com/zcrawl/zcrawl/server/api/jobs"
 	"github.com/zcrawl/zcrawl/server/api/projects"
 	"github.com/zcrawl/zcrawl/server/api/users"
@@ -38,6 +39,9 @@ func (api *API) loadRoutes() {
 
 	workersRouter := workers.New()
 	api.Mount("/workers", workersRouter)
+
+	dsRouter := datastore.New()
+	api.Mount("/datastore", dsRouter)
 
 	api.Get("/ping", api.ping)
 }
