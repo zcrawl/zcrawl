@@ -1,5 +1,7 @@
 # zcrawl
 
+[![CircleCI](https://circleci.com/gh/zcrawl/zcrawl/tree/master.svg?style=svg)](https://circleci.com/gh/zcrawl/zcrawl/tree/master)
+
 `zcrawl` is an open source software platform to deploy and orchestrate web crawlers and crawling tasks in general. It's written in [Go](https://golang.org/) and one of the goals is to make it as flexible as possible to allow integrations with different languages and third-party services.
 
 In order to avoid any language lock-ins, `zcrawl` will provide enough tools to enhance the process of creating and deploying a web crawler using your favorite language, so it's not Go specific.
