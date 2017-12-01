@@ -20,6 +20,15 @@ type Crawler struct {
 
 // Job represents a job.
 type Job struct {
-	ID      bson.ObjectId `bson:"_id" json:"_id"`
-	Project *Project      `bson:",omitempty" json:",omitempty"`
+	ID        bson.ObjectId `bson:"_id" json:"_id"`
+	Project   *Project      `bson:",omitempty" json:",omitempty"`
+	CrawlerID bson.ObjectId `bson:"crawler_id" json:"crawler_id"`
+}
+
+// StoreRecord wraps a dynamic data structure.
+type StoreRecord struct {
+	ID             bson.ObjectId `bson:"_id" json:"_id"`
+	JobID          bson.ObjectId `bson:"job_id" json:"job_id"`
+	CollectionName string        `bson:"collection_name" json:"collection_name"`
+	Data           map[string]interface{}
 }
