@@ -32,3 +32,11 @@ type StoreRecord struct {
 	CollectionName string        `bson:"collection_name" json:"collection_name"`
 	Data           map[string]interface{}
 }
+
+// User represents a user.
+type User struct {
+	ID        bson.ObjectId `bson:"_id" json:"_id"`
+	Firstname string        `json:"firstname" bson:"firstname"`
+	Lastname  string        `json:"lastname" bson:"lastname"`
+	Email     string        `json:"email" bson:"email"`
+}
