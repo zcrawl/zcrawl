@@ -16,7 +16,7 @@ type Router struct {
 }
 
 func (r *Router) getProjects(w http.ResponseWriter, req *http.Request) {
-	p := models.ProjectCollection{}
+	p := models.ProjectsCollection{}
 	err := p.GetAll()
 	if err != nil {
 		helpers.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
