@@ -17,6 +17,11 @@ type Router struct {
 }
 
 func (r *Router) getUsers(w http.ResponseWriter, req *http.Request) {
+	u := models.UsersCollection{}
+	u.GetAll()
+	usersJSON, _ := json.Marshal(&u)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(usersJSON)
 }
 
 func (r *Router) createUser(w http.ResponseWriter, req *http.Request) {
