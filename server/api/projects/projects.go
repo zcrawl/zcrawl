@@ -19,7 +19,7 @@ func (r *Router) getProjects(w http.ResponseWriter, req *http.Request) {
 	p := models.ProjectsCollection{}
 	err := p.GetAll()
 	if err != nil {
-		helpers.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		helpers.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
 	projectsJSON, _ := json.Marshal(&p)

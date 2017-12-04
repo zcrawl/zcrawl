@@ -18,7 +18,10 @@ type Router struct {
 
 func (r *Router) getUsers(w http.ResponseWriter, req *http.Request) {
 	u := models.UsersCollection{}
-	u.GetAll()
+	err := u.GetAll()
+	if err != nil {
+		helpers.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+	}
 	usersJSON, _ := json.Marshal(&u)
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(usersJSON)
