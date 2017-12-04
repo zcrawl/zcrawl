@@ -14,6 +14,21 @@ const (
 // Project is an alias for types.Project
 type Project types.Project
 
+// ProjectCollection is an alias for a collection of projects
+type ProjectCollection []types.Project
+
+// GetAll retrieves all projects hopefully
+func (p *ProjectCollection) GetAll() error {
+	session := mongoSession.Clone()
+	defer session.Close()
+	collection := session.DB(mongoDialInfo.Database).C(projectsCollectionName)
+	err := collection.Find(bson.M{}).All(p)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 // Get retrieves a project item.
 func (p *Project) Get(id string) error {
 	session := mongoSession.Clone()
