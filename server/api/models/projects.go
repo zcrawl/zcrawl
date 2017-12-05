@@ -22,11 +22,7 @@ func (p *ProjectsCollection) GetAll() error {
 	session := mongoSession.Clone()
 	defer session.Close()
 	collection := session.DB(mongoDialInfo.Database).C(projectsCollectionName)
-	err := collection.Find(bson.M{}).All(p)
-	if err != nil {
-		return err
-	}
-	return nil
+	return collection.Find(bson.M{}).All(p)
 }
 
 // Get retrieves a project item.
