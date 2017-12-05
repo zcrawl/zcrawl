@@ -16,6 +16,15 @@ type Router struct {
 }
 
 func (r *Router) getProjects(w http.ResponseWriter, req *http.Request) {
+	p := models.ProjectsCollection{}
+	err := p.GetAll()
+	if err != nil {
+		helpers.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+	projectsJSON, _ := json.Marshal(&p)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(projectsJSON)
 }
 
 func (r *Router) createProject(w http.ResponseWriter, req *http.Request) {
