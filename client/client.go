@@ -8,6 +8,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+
+	"github.com/zcrawl/zcrawl/types"
 )
 
 const (
@@ -109,4 +111,35 @@ func (c *Client) CollectionStore(item map[string]interface{}, collection string)
 // Store stores a record in the global collection.
 func (c *Client) Store(item map[string]interface{}) {
 	c.CollectionStore(item, c.config.Collection)
+}
+
+type jobRequest struct {
+	CrawlerID string `json:"crawler_id"`
+}
+
+// CreateJob creates a job.
+func (c *Client) CreateJob(crawlerID string) (jobID string, err error) {
+	jobReq := jobRequest{
+		CrawlerID: crawlerID,
+	}
+	reqJSON, err := json.Marshal(&jobReq)
+	if err != nil {
+		return jobID, err
+	}
+	req, err := c.newRequestWithData("POST", "/jobs", reqJSON)
+	if err != nil {
+		return jobID, err
+	}
+	res, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return jobID, err
+	}
+	var job types.Job
+	decoder := json.NewDecoder(res.Body)
+	err = decoder.Decode(&job)
+	if err != nil {
+		return jobID, err
+	}
+	jobID = job.ID.Hex()
+	return jobID, err
 }
